@@ -32,9 +32,9 @@ if action == "Login":
         try:
             user = auth.sign_in_with_email_and_password(email, password)
             st.success("🎉 Logged in successfully! Redirecting...")
-            st.markdown("[Click here if not redirected](https://w9lpq8ji6knqtc7wqnvixv.streamlit.app/)")
+            st.markdown("[Click here if not redirected](https://nfokwvg7tr3ugjgrhvrjka.streamlit.app/)")
             st.components.v1.html(
-                """<meta http-equiv="refresh" content="1;url='https://w9lpq8ji6knqtc7wqnvixv.streamlit.app/'" />""",
+                """<meta http-equiv="refresh" content="1;url='https://nfokwvg7tr3ugjgrhvrjka.streamlit.app/'" />""",
                 height=0
             )
         except Exception as e:
