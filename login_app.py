@@ -3,11 +3,13 @@ import json
 import pyrebase
 
 # --- Load Firebase Config from Streamlit Secrets ---
-firebase_config = json.loads(st.secrets["FIREBASE_CONFIG"])
-
-# --- Initialize Firebase ---
-firebase = pyrebase.initialize_app(firebase_config)
-auth = firebase.auth()
+try:
+    firebase_config = json.loads(st.secrets["FIREBASE_CONFIG"])
+    firebase = pyrebase.initialize_app(firebase_config)
+    auth = firebase.auth()
+except Exception as config_error:
+    st.error(f"❌ Failed to load Firebase config: {config_error}")
+    st.stop()
 
 # --- Streamlit UI Setup ---
 st.set_page_config(page_title="Login | Mood Journal", layout="centered")
@@ -24,7 +26,7 @@ if action == "Register":
             auth.create_user_with_email_and_password(email, password)
             st.success("✅ Account created! Please log in.")
         except Exception as e:
-            st.error(f"Registration failed: {e}")
+            st.error(f"❌ Registration failed: {e}")
 
 # --- User Login ---
 if action == "Login":
@@ -38,4 +40,4 @@ if action == "Login":
                 height=0
             )
         except Exception as e:
-            st.error(f"Login failed: {e}")
+            st.error(f"❌ Login failed: {e}")
